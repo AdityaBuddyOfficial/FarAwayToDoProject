@@ -1,21 +1,33 @@
 import React, { useState } from 'react'
 import "./style.css"
+import Item from './Types/list'
+import Props from './Types/listSetterFun'
 
-const Form = () => {
+
+
+const Form:React.FC<Props>  = (props) => {
+
     const[desciption,setDescription]=useState("")
+    console.log("🚀 ~ Form ~ desciption:", desciption)
 const[quantity,setQuantity]=useState(1)
 
-    function handleSubmit(e) {
+
+
+
+
+
+    function handleSubmit(e:any) {
         e.preventDefault();
 
         if(!desciption){
             return
         }
-        const newItem={desciption,quantity,packed:false,id:Date.now()}
+        const newItem:Item={desciption,quantity,packed:false,id:Date.now()}
 
         console.log("🚀 ~ handleSubmit ~ newItem:", newItem)
         setDescription("");
         setQuantity(1);
+        props.handleItem(newItem)
     }
     return (
         <form className='add-form' onSubmit={handleSubmit}>
